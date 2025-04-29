@@ -4,6 +4,12 @@
 
 Helper Project for Windows first installation setup customization.
 
+## Sponsoring
+
+If you like this project and want to support us, we would be very happy to see you as a sponsor on GitHub ❤️<br>
+You can find the `Sponsor` button on the top right of the [GitHub project page](https://github.com/toddeTV/windows-setup-tool).<br>
+Thanks a lot for the support <3
+
 ## Attribution/ Contribution
 
 Project founder & head of project:
