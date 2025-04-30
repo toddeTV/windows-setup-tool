@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "GitHub.copilot",
+    "Gruntfuggly.todo-tree",
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "ms-python.pylint",
+    "ms-python.vscode-pylance",
+    "naumovs.color-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one"
+  ]
+}

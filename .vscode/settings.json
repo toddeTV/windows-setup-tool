@@ -1,0 +1,28 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
+  "editor.defaultFormatter": "ms-python.pylint",
+  "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
+  "editor.rulers": [
+    120
+  ],
+  "files.autoSave": "onFocusChange",
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "search.exclude": {
+    "**/__pycache__": true,
+    "pnpm-lock.yaml": true
+  },
+  //
+  // open new terminals automatically in the virtual environment
+  "python.defaultInterpreterPath": ".venv\\Scripts\\python.exe",
+  "terminal.integrated.env.windows": {
+    "VIRTUAL_ENV": "${workspaceFolder}\\.venv",
+    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}"
+  }
+}
