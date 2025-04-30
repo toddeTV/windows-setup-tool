@@ -10,6 +10,7 @@
     120
   ],
   "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": true,
   "python.linting.mypyEnabled": true,
