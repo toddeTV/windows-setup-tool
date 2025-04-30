@@ -3,7 +3,7 @@
     "source.organizeImports": "never",
     "source.fixAll": "explicit"
   },
-  "editor.defaultFormatter": "ms-python.pylint",
+  // "editor.defaultFormatter": "ms-python.python",
   "editor.formatOnSave": true,
   "editor.linkedEditing": true,
   "editor.rulers": [
