@@ -3,13 +3,14 @@
     "source.organizeImports": "never",
     "source.fixAll": "explicit"
   },
-  "editor.defaultFormatter": "ms-python.pylint",
+  // "editor.defaultFormatter": "ms-python.python",
   "editor.formatOnSave": true,
   "editor.linkedEditing": true,
   "editor.rulers": [
     120
   ],
   "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": true,
   "python.linting.mypyEnabled": true,
