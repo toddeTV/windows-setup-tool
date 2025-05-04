@@ -1,2 +1,4 @@
 # Test what version is installed on the system: `pip show <package-name>`
 # Or dump all currently present packages with their versions: `pip freeze > requirements-currently-installed.txt`
+
+pretty_errors==1.2.25

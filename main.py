@@ -1,4 +1,8 @@
+from utils.pretty_errors import init_pretty_errors
+
+
 def main():
+    init_pretty_errors()
     print_header()
 
 
