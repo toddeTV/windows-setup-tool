@@ -18,12 +18,12 @@ def printf(text: str):
     print(f"{text}")
 
 
-def printc(text: str, color: COLOR_ENUM):
-    print(f"{get_colored(text, color)}")
+def printc(text: str, col: COLOR_ENUM):
+    print(f"{color(text, col)}")
 
 
-def get_colored(text: str, color: COLOR_ENUM) -> str:
-    return f"{color}{text}{COLOR_ENUM.RESET_ALL}"
+def color(text: str, col: COLOR_ENUM) -> str:
+    return f"{col}{text}{COLOR_ENUM.RESET_ALL}"
 
 
 def ask_input(prompt: str) -> str:
