@@ -1,8 +1,11 @@
 from pretty_errors import configure, blacklist
 from os import environ
 
+from utils.console import print_with_prefix_main
+
 
 def init_pretty_errors():
+    print_with_prefix_main("Initializing 'pretty_errors'.")
     configure(
         # separator_character="*",
         # filename_display=pretty_errors.FILENAME_EXTENDED,
@@ -15,7 +18,6 @@ def init_pretty_errors():
         # truncate_code=True,
         # display_locals=True,
     )
-    print()
     blacklist(
         environ[
             "VIRTUAL_ENV"  # path to tne venv folder, e.g. `C:\foo\bar\windows_setup_tool\.venv`
