@@ -1,6 +1,8 @@
 # Test what version is installed on the system: `pip show <package-name>`
 # Or dump all currently present packages with their versions: `pip freeze > requirements-currently-installed.txt`
 
+black==25.1.0
 colorama==0.4.6
 mypy==1.15.0
 pretty_errors==1.2.25
+pylint==3.3.6

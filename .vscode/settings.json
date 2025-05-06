@@ -1,7 +1,9 @@
 {
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "never",
-    "source.fixAll": "explicit"
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.unusedImports": "explicit",
+    "source.fixAll.pylance": "explicit"
   },
   // "editor.defaultFormatter": "ms-python.python",
   "editor.formatOnSave": true,
@@ -12,6 +14,7 @@
   "files.autoSave": "onFocusChange",
   "files.eol": "\n",
   "python.formatting.provider": "black",
+  "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.mypyEnabled": true,
   "python.analysis.typeCheckingMode": "basic",

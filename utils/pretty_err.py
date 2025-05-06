@@ -1,6 +1,5 @@
 from pretty_errors import configure, blacklist
 from os import environ
-
 from utils.console import print_with_prefix_main
 
 

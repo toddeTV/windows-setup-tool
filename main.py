@@ -1,17 +1,16 @@
+from sys import exit as sysExit
 from subscript_skeleton import SubscriptSkeleton
 from utils.console import (
     COLOR,
     colorize,
     init_colorama,
-    print_with_prefix,
     print_with_prefix_main,
 )
-from utils.pretty_errors import init_pretty_errors
-from sys import exit as sysExit, executable
+from utils.pretty_err import init_pretty_errors
+from utils.result_type import SubScriptResult
 from traceback import print_exc
 from subscripts.install_software import InstallSoftware
 from subscripts.setup_system_settings import SetupSystemSettings
-from utils.result_type import SubScriptResult
 from random import choice
 
 

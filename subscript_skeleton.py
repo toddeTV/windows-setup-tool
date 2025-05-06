@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from utils.console import COLOR, colorize, print_with_prefix
+from utils.console import COLOR, print_with_prefix
 from utils.result_type import SubScriptResult
 
 
