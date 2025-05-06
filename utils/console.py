@@ -25,6 +25,7 @@ class COLOR(Enum):
     """
 
     RESET_ALL = Style.RESET_ALL
+    BLUE = Fore.BLUE
     CYAN = Fore.CYAN  # good for input prompts
     GREEN = Fore.GREEN
     MAGENTA = Fore.MAGENTA
