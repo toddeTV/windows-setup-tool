@@ -51,22 +51,23 @@ def run_all_sub_scripts():
     print_with_prefix_main("▶️  Running all sub-scripts...")
 
     possible_subscript_prefix_colors = [
+        # COLOR.RESET_ALL, # no reset as it is no color
+        COLOR.BLUE,
         COLOR.CYAN,
         COLOR.GREEN,
         # COLOR.MAGENTA, # only for main script
-        COLOR.RED,
+        # COLOR.RED, # only for errors
         COLOR.YELLOW,
     ]
 
     # Create a list of all subscript with a random color for each
     # TODO for a subscript do not use the same color as the last subscript
-    subscripts = [
+    subscripts: list[SubscriptSkeleton] = [
         SetupSystemSettings(prefix_color=choice(possible_subscript_prefix_colors)),
         InstallSoftware(prefix_color=choice(possible_subscript_prefix_colors)),
     ]
 
     for script_instance in subscripts:
-        script_instance = script_instance  # type: SubscriptSkeleton
         print_with_prefix_main()
         print_with_prefix_main(f"Running sub-script: '{script_instance.name_short}'")
         script_instance.print("ℹ️ Now starting ...")
