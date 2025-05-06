@@ -4,6 +4,7 @@
     "Gruntfuggly.todo-tree",
     "ms-python.python",
     "ms-python.black-formatter",
+    "ms-python.mypy-type-checker",
     "ms-python.pylint",
     "ms-python.vscode-pylance",
     "naumovs.color-highlight",
