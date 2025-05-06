@@ -1,15 +1,11 @@
 from subscript_skeleton import SubscriptSkeleton
-from utils.console import printf
 from utils.result_type import SubScriptResult
 
 
 class InstallSoftware(SubscriptSkeleton):
-    name = "Install Software"
+    name_short = "install_software"  # max 30 chars
+    name_long = "Install Software"
 
     def run(self) -> SubScriptResult:
-        prefix = f"[{self.name}]"
-        printf("{prefix} Starting software installation...")
-
-        printf("{prefix} Installed all required programs successfully.")
-
+        self.print("Do something.")
         return SubScriptResult.SUCCESS
