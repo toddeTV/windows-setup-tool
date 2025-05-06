@@ -6,25 +6,13 @@ from enum import Enum
 init()
 
 
-class COLOR_ENUM(Enum):
+class COLOR(Enum):
+    RESET_ALL = Style.RESET_ALL
     RED = Fore.RED
     GREEN = Fore.GREEN
     YELLOW = Fore.YELLOW
-    CYAN = Fore.CYAN
-    RESET_ALL = Style.RESET_ALL
+    CYAN = Fore.CYAN  # good for input prompts
 
 
-def printf(text: str):
-    print(f"{text}")
-
-
-def printc(text: str, col: COLOR_ENUM):
-    print(f"{color(text, col)}")
-
-
-def color(text: str, col: COLOR_ENUM) -> str:
-    return f"{col}{text}{COLOR_ENUM.RESET_ALL}"
-
-
-def ask_input(prompt: str) -> str:
-    return input(f"{COLOR_ENUM.CYAN}{prompt}{COLOR_ENUM.RESET_ALL}")
+def colorize(text: str, color: COLOR) -> str:
+    return f"{color}{text}{COLOR.RESET_ALL}"

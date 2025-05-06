@@ -1,4 +1,3 @@
-from utils.console import printf
 from utils.pretty_errors import init_pretty_errors
 from sys import exit as sysExit, executable
 from traceback import print_exc
@@ -21,16 +20,16 @@ def main():
 
 def print_header():
     line_length = 50
-    printf("=" * line_length)
-    printf("windows_setup_tool".center(line_length))
-    printf("Automated Computer Setup".center(line_length))
-    printf("=" * line_length)
-    printf("\nℹ️ Information:")
-    printf("   This tool helps system administrators quickly prepare new computers.")
+    print(f"=" * line_length)
+    print(f"windows_setup_tool".center(line_length))
+    print(f"Automated Computer Setup".center(line_length))
+    print(f"=" * line_length)
+    print(f"\nℹ️ Information:")
+    print(f"   This tool helps system administrators quickly prepare new computers.")
 
 
 def run_all_sub_scripts():
-    printf("\n▶️  Running all sub-scripts...\n")
+    print(f"\n▶️  Running all sub-scripts...\n")
 
     subscripts = {
         SetupSystemSettings().name: SetupSystemSettings(),
@@ -42,7 +41,7 @@ def run_all_sub_scripts():
         result = safe_run_script(script_instance.run, script_name)
 
         if result == SubScriptResult.ABORT_HARD:
-            printf("🛑 Hard abort from {script_name}. Exiting program.")
+            print(f"🛑 Hard abort from {script_name}. Exiting program.")
             sysExit(2)
 
 
@@ -54,24 +53,24 @@ def safe_run_script(func, script_name):
             SubScriptResult.ABORT_SOFT,
             SubScriptResult.ABORT_HARD,
         ):
-            printf(
-                "⚠️  {script_name}: Unknown result '{result}'. Treating as soft abort."
+            print(
+                f"⚠️  {script_name}: Unknown result '{result}'. Treating as soft abort."
             )
             return SubScriptResult.ABORT_SOFT
         return result
 
     except KeyboardInterrupt:
-        printf("\n\n⚠️  Program interrupted by user (Ctrl+C). Exiting gracefully...")
+        print(f"\n\n⚠️  Program interrupted by user (Ctrl+C). Exiting gracefully...")
         sysExit(1)
 
     except Exception:
-        printf("❗ Exception occurred while running {script_name}:")
+        print(f"❗ Exception occurred while running {script_name}:")
         print_exc()
         return SubScriptResult.ABORT_SOFT
 
 
 def exit_program():
-    printf("\n👋 Goodbye!")
+    print(f"\n👋 Goodbye!")
     sysExit(0)
 
 
