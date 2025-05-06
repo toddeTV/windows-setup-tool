@@ -5,11 +5,11 @@ from enum import Enum
 
 def init_colorama():
     """
-    Initializes colorama for cross-platform compatibility.
+    Initializes `colorama` for cross-platform compatibility.
     This function should be called at the start of the program to ensure
     that ANSI escape sequences are interpreted correctly on Windows.
     """
-    # Check if colorama is already initialized & ensure it's only initialized once
+    # Check if `colorama` is already initialized & ensure it's only initialized once
     if not hasattr(init_colorama, "initialized"):
         print_with_prefix_main("Initializing 'colorama'.")
         init_colorama.initialized = True
