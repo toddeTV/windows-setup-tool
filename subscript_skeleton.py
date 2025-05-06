@@ -6,11 +6,17 @@ from utils.result_type import SubScriptResult
 class SubscriptSkeleton(ABC):
     """Base class for all sub-scripts."""
 
+    # set in subscript classes
     name_short: str  # max 30 chars
     name_long: str
+
+    # only stored, do not set in subscript classes
     prefix_name_color: COLOR
 
     def __init__(self, prefix_color: COLOR):
+        """
+        Initializes the sub-script with a color for the prefix and implementation checks/tests.
+        """
         if not hasattr(self, "name_short"):
             raise ValueError("Sub-scripts must define a 'name_short' attribute.")
         if not self.name_short:
