@@ -1,5 +1,8 @@
 # template source: https://github.com/github/gitignore/blob/main/Python.gitignore
 
+# specific to this project
+logs/*.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
