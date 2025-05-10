@@ -1,3 +1,5 @@
+import sys
+
 from sys import exit as sysExit
 from subscript_skeleton import SubscriptSkeleton
 from utils.console import (
@@ -6,7 +8,7 @@ from utils.console import (
     init_colorama,
     print_with_prefix_main,
 )
-from utils.pretty_err import init_pretty_errors
+from utils.pretty_err import custom_exception_hook_with_logger, init_pretty_errors
 from utils.result_type import SubScriptResult
 from traceback import print_exc
 from subscripts.install_software import InstallSoftware
@@ -19,6 +21,8 @@ def main():
 
     # There could be a global Exception catch here, but we want them to be thrown at this level. Only executing the
     # subscripts should be caught and handled.
+
+    sys.excepthook = custom_exception_hook_with_logger
 
     print_header()
 

@@ -1,6 +1,7 @@
 from pretty_errors import configure, blacklist
 from os import environ
 from utils.console import print_with_prefix_main
+from utils.logs import LogLevelEnum
 
 
 def init_pretty_errors():
@@ -10,7 +11,9 @@ def init_pretty_errors():
     """
     # Check if `pretty_errors` is already initialized & ensure it's only initialized once
     if not hasattr(init_pretty_errors, "initialized"):
-        print_with_prefix_main("Initializing 'pretty_errors'.")
+        print_with_prefix_main(
+            log_level=LogLevelEnum.DEBUG, text="Initializing 'pretty_errors'."
+        )
         init_pretty_errors.initialized = True
         configure(
             # separator_character="*",
@@ -32,3 +35,17 @@ def init_pretty_errors():
     else:
         # If already initialized, do nothing
         return
+
+
+def custom_exception_hook_with_logger(exc_type, exc_value, tb):
+
+    local_vars = {}
+    while tb:
+        filename = tb.tb_frame.f_code.co_filename
+        name = tb.tb_frame.f_code.co_name
+        line_no = tb.tb_lineno
+        print(f"File {filename} line {line_no}, in {name}")
+
+        local_vars = tb.tb_frame.f_locals
+        tb = tb.tb_next
+    print(f"Local variables in top frame: {local_vars}")
