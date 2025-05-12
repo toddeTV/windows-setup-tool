@@ -1,4 +1,5 @@
 import logging
+
 from utils.singleton import Singleton
 from datetime import datetime
 from enum import Enum
@@ -53,3 +54,15 @@ class Logs(metaclass=Singleton):
             raise TypeError("message must be a string")
 
         self._logger.log(level.value, message)
+
+    def getLogger(self, name: str) -> logging.Logger:
+        """
+        Returns a logger with the specified name.
+        Args:
+            name (str): The name of the logger.
+        Returns:
+            logging.Logger: The logger with the specified name.
+        """
+        if not isinstance(name, str):
+            raise TypeError("name must be a string")
+        return logging.getLogger(name)
