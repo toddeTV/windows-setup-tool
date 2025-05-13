@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from utils.console import COLOR, print_with_prefix
+from utils.colors import COLOR
+from utils.logs import LogLevelEnum, Logs
 from utils.result_type import SubScriptResult
 
 
@@ -37,9 +38,14 @@ class SubscriptSkeleton(ABC):
 
         self.prefix_name_color = prefix_color
 
-    def print(self, *args, **kwargs):
-        """Prints the message with the sub-script name as prefix."""
-        print_with_prefix(self.name_short, self.prefix_name_color, *args, **kwargs)
+    def log(self, message: str = "", log_level: LogLevelEnum = LogLevelEnum.INFO):
+        """Logs the message with the sub-script name as prefix."""
+        Logs().log_with_prefix(
+            prefix_text=self.name_short,
+            prefix_color=self.prefix_name_color,
+            message=message,
+            log_level=log_level,
+        )
 
     @abstractmethod
     def run(self) -> SubScriptResult:
