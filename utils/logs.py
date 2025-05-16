@@ -44,28 +44,25 @@ class Logs(metaclass=Singleton):
     _full_path: str = f"{_log_path}/{_filename}"
 
     # handler: file
-    handler_file = logging.FileHandler(_full_path)
-    handler_file.setLevel(logging.DEBUG)
+    handler_file = logging.FileHandler(_full_path, mode="a", encoding="utf-8")
+    # handler_file.setLevel(logging.DEBUG)
     handler_file.setFormatter(
         NoColorFormatter(  # remove colors when logging to file
             "%(asctime)-15s %(levelname)-8s %(message)s"
         )
     )
-    # handler_file.mode = "w"
-    handler_file.mode = "a+"
-    handler_file.encoding = "utf-8"
 
     # handler: console
     handler_console = logging.StreamHandler()
-    handler_console.setLevel(logging.DEBUG)
+    # handler_console.setLevel(logging.DEBUG)
     handler_console.setFormatter(logging.Formatter("%(levelname)-8s %(message)s"))
 
-    # basic logging configuration
-    logging.basicConfig(
-        handlers=[handler_file, handler_console],
-    )
-
     _logger_CUSTOM: logging.Logger = logging.getLogger("windows_setup_tool")
+    _logger_CUSTOM.setLevel(logging.DEBUG)
+    _logger_CUSTOM.addHandler(handler_file)
+    _logger_CUSTOM.addHandler(handler_console)
+    # _logger_CUSTOM.propagate = False
+
     _logger_STDOUT: logging.Logger = logging.getLogger("STDOUT")
     _logger_STDERR: logging.Logger = logging.getLogger("STDERR")
 
@@ -75,6 +72,9 @@ class Logs(metaclass=Singleton):
         Args:
             level (LogLevelEnum): The log level to use.
             message (str): The message to log.
+        Raises:
+            TypeError: If level is not an instance of LogLevelEnum.
+            TypeError: If message is not a string.
         """
 
         if not isinstance(level, LogLevelEnum):
