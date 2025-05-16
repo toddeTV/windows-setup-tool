@@ -1,5 +1,6 @@
 import logging
 import re
+import os
 
 from utils.colors import COLOR, colorize
 from utils.singleton import Singleton
@@ -43,6 +44,9 @@ class Logs(metaclass=Singleton):
     _filename: str = datetime.today().strftime("%Y-%m-%d_%H-%M-%S.log")
     _full_path: str = f"{_log_path}/{_filename}"
 
+    # Create the log directory if it doesn't exist
+    os.makedirs(_log_path, exist_ok=True)
+
     # handler: file
     handler_file = logging.FileHandler(_full_path, mode="a", encoding="utf-8")
     # handler_file.setLevel(logging.DEBUG)
@@ -59,30 +63,48 @@ class Logs(metaclass=Singleton):
 
     _logger_CUSTOM: logging.Logger = logging.getLogger("windows_setup_tool")
     _logger_CUSTOM.setLevel(logging.DEBUG)
-    _logger_CUSTOM.addHandler(handler_file)
-    _logger_CUSTOM.addHandler(handler_console)
+    if not _logger_CUSTOM.handlers:
+        _logger_CUSTOM.addHandler(handler_file)
+        _logger_CUSTOM.addHandler(handler_console)
     # _logger_CUSTOM.propagate = False
 
     _logger_STDOUT: logging.Logger = logging.getLogger("STDOUT")
     _logger_STDERR: logging.Logger = logging.getLogger("STDERR")
 
+    @property
+    def logger_CUSTOM(self) -> logging.Logger:
+        return self._logger_CUSTOM
+
+    @property
+    def logger_STDOUT(self) -> logging.Logger:
+        return self._logger_STDOUT
+
+    @property
+    def logger_STDERR(self) -> logging.Logger:
+        return self._logger_STDERR
+
     def log(self, message: str, level: LogLevelEnum = LogLevelEnum.DEBUG) -> None:
         """
         Logs a message with the specified log level.
+
         Args:
-            level (LogLevelEnum): The log level to use.
             message (str): The message to log.
+            level (LogLevelEnum): The log level to use.
+
         Raises:
-            TypeError: If level is not an instance of LogLevelEnum.
-            TypeError: If message is not a string.
+            TypeError: If level is not an instance of LogLevelEnum or message is not a string.
         """
 
-        if not isinstance(level, LogLevelEnum):
-            raise TypeError("level must be an instance of LogLevelEnum")
         if not isinstance(message, str):
-            raise TypeError("message must be a string")
+            raise TypeError(
+                f"Expected 'message' to be str, got {type(message).__name__}"
+            )
+        if not isinstance(level, LogLevelEnum):
+            raise TypeError(
+                f"Expected 'level' to be LogLevelEnum, got {type(level).__name__}"
+            )
 
-        self._logger_CUSTOM.log(level.value, message)
+        self.logger_CUSTOM.log(level.value, message)
 
     def log_with_prefix(
         self,
@@ -90,49 +112,47 @@ class Logs(metaclass=Singleton):
         message: str = "",
         prefix_color: COLOR | None = None,
         log_level: LogLevelEnum = LogLevelEnum.INFO,
-    ):
-        if prefix_color is None:
-            prefix_color = COLOR.RESET_ALL
+    ) -> None:
+        """
+        Logs a message with a colored prefix block.
 
-        # prefix_text_stretched: str = prefix_text.center(30)
-        prefix_text_stretched: str = prefix_text.ljust(30)
+        Args:
+            prefix_text (str): The label shown in brackets.
+            message (str): The message to log.
+            prefix_color (COLOR | None): Color for the prefix text.
+            log_level (LogLevelEnum): Logging level.
 
-        prefix_modified: str = f"[{colorize(prefix_text_stretched, prefix_color)}] "
+        Raises:
+            TypeError: If prefix_text is not a string or message is not a string.
+        """
 
-        output: str = f"{prefix_modified}{message}"
+        if not isinstance(prefix_text, str):
+            raise TypeError(
+                f"'prefix_text' must be str, got {type(prefix_text).__name__}"
+            )
+        if not isinstance(message, str):
+            raise TypeError(f"'message' must be str, got {type(message).__name__}")
 
-        self.log(message=output, level=log_level)
+        prefix_color = prefix_color or COLOR.RESET_ALL
+        padded_prefix = prefix_text.ljust(30)
+        prefix = f"[{colorize(padded_prefix, prefix_color)}]"
+
+        full_message = f"{prefix} {message}".rstrip()
+        self.log(full_message, level=log_level)
 
     def log_with_prefix_main(
         self, message: str = "", log_level: LogLevelEnum = LogLevelEnum.INFO
-    ):
+    ) -> None:
+        """
+        Shortcut to log a message with a 'main' prefix.
+
+        Args:
+            message (str): The message to log.
+            log_level (LogLevelEnum): Logging level.
+        """
         self.log_with_prefix(
             prefix_text="main",
             prefix_color=COLOR.MAGENTA,
             message=message,
             log_level=log_level,
         )
-
-    def getLoggerCustom(self) -> logging.Logger:
-        """
-        Returns the custom logger.
-        Returns:
-            logging.Logger: The custom logger.
-        """
-        return self._logger_CUSTOM
-
-    def getLoggerStdout(self) -> logging.Logger:
-        """
-        Returns the stdout logger.
-        Returns:
-            logging.Logger: The stdout logger.
-        """
-        return self._logger_STDOUT
-
-    def getLoggerStderr(self) -> logging.Logger:
-        """
-        Returns the stderr logger.
-        Returns:
-            logging.Logger: The stderr logger.
-        """
-        return self._logger_STDERR
